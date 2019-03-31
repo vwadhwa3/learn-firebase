@@ -1,0 +1,47 @@
+<html>
+    <head>
+        <title>logined</title>
+    </head>
+    <body>
+        <script src="https://www.gstatic.com/firebasejs/5.9.2/firebase.js"></script>
+<script>
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyBvfZjUOZhBSy0dBXVWGL2G7bEBGVIwSz8",
+    authDomain: "webemailauth-e7a09.firebaseapp.com",
+    databaseURL: "https://webemailauth-e7a09.firebaseio.com",
+    projectId: "webemailauth-e7a09",
+    storageBucket: "webemailauth-e7a09.appspot.com",
+    messagingSenderId: "79845689083"
+  };
+  firebase.initializeApp(config);
+</script>
+<script>
+firebase.auth().onAuthStateChanged(function (user){ 
+if(user){
+    
+    document.body.innerHTML ='<button onclick="logout()" style="float:right" >logout</button>'+ '<p>'+user.displayName+'</p>'+'<p>'+ user.email+'</p>';
+    // document.getElementById('photoURL').innerHTML ='<img src="'+firebase.auth().currentUser.photoURL+'"/>';
+    console.log(user.photoURL); 
+    
+    // ='<button id="logout" onclick="logout()" >logout</button>'
+}else{
+    document.body.innerHTML ='<h1>no user found </h1>'
+}
+});
+</script>
+<h1>hello</h1>
+<!-- <button id="logout" onclick="logout()" >logout</button> -->
+<script>
+function logout(){
+    firebase.auth().signOut().then(function() {
+        console.log("yes");
+        window.location.assign('index.html');
+}).catch(function(error) {
+  // An error happened.
+  console.log("no"+error);
+});
+}
+</script>
+</body>
+</html>

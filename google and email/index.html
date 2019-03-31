@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>google and email auth</title>
+    </head>
+
+<script src="https://www.gstatic.com/firebasejs/5.9.2/firebase.js"></script>
+<script>
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyBvfZjUOZhBSy0dBXVWGL2G7bEBGVIwSz8",
+    authDomain: "webemailauth-e7a09.firebaseapp.com",
+    databaseURL: "https://webemailauth-e7a09.firebaseio.com",
+    projectId: "webemailauth-e7a09",
+    storageBucket: "webemailauth-e7a09.appspot.com",
+    messagingSenderId: "79845689083"
+  };
+  firebase.initializeApp(config);
+</script>
+
+<script src="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.js"></script>
+<link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.css" />
+<script type="text/javascript">
+  // FirebaseUI config.
+  var uiConfig = {
+    signInSuccessUrl: 'logined.html',
+    signInOptions: [
+      // Leave the lines as is for the providers you want to offer your users.
+      firebase.auth.GoogleAuthProvider.PROVIDER_ID,
+      firebase.auth.EmailAuthProvider.PROVIDER_ID,
+      firebase.auth.PhoneAuthProvider.PROVIDER_ID,
+      firebaseui.auth.AnonymousAuthProvider.PROVIDER_ID
+    ],
+    // tosUrl and privacyPolicyUrl accept either url string or a callback
+    // function.
+    // Terms of service url/callback.
+    // tosUrl: '<your-tos-url>',
+    // Privacy policy url/callback.
+    // privacyPolicyUrl: function() {
+    //   window.location.assign('<your-privacy-policy-url>');
+    // }
+  };
+
+  // Initialize the FirebaseUI Widget using Firebase.
+  var ui = new firebaseui.auth.AuthUI(firebase.auth());
+  // The start method will wait until the DOM is loaded.
+  ui.start('#firebaseui-auth-container', uiConfig);
+</script>
+
+    <div></div>
+    <body>
+      <h1 align="center" style="color: black">google and email</h1> 
+      <div id="firebaseui-auth-container"></div>
+    </body>
+</html>
