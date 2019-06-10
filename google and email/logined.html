@@ -2,11 +2,26 @@
     <head>
         <title>logined</title>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
-    </head>
-    <body id="b">
         <script src="https://www.gstatic.com/firebasejs/5.9.2/firebase.js"></script>
-         <link rel = "stylesheet" type = "text/css" href = "../google and email/css/materialize.css" />
-         <script src="../google and email/js/materialize.js"></script>
+        <link rel = "stylesheet" type = "text/css" href = "../google and email/css/materialize.css" />
+        <script src="../google and email/js/materialize.js"></script>
+        <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script> -->
+      </head>
+    <body id="b">
+        <nav hidden="hidden" id="navbar">
+            <div class="nav-wrapper">
+              <a href="#" class="brand-logo">Logo</a>
+              <ul id="nav-mobile" class="right hide-on-med-and-down">
+                <li><a href="sass.html">Sass</a></li>
+                <li><a href="badges.html">Components</a></li>
+                <li><a href="collapsible.html">JavaScript</a></li>
+                <li id="up"  ><a href="#">User Profile</a></li>
+                <li><a id="logout" class="waves-effect waves-light btn" onclick="logout();">Logout</a></li>
+            </ul>
+            </div>
+          </nav>
+        <div id="wrapper"></div>
 <script>
   // Initialize Firebase
   var config = {
@@ -21,106 +36,99 @@
 </script>
 <script>
 firebase.auth().onAuthStateChanged(function (user){ 
-if(user){
-// navbar
-  var nav = document.createElement('nav');
-  nav.id="navbars";
-  var containerdiv= document.createElement('div');
-  containerdiv.id="nav-wrapper";
-  containerdiv.className="nav-wrapper";
-  var logo = document.createElement('a');
-  logo.id="logo";
-  logo.className="brand-logo";
-  logo.textContent="logo";
-  var uls= document.createElement('ul');
-  uls.id="nav-mobile";
-  uls.classList="right hide-on-med-and-down";
+if(user!=null){
+$('#navbar').show();
+$('#wrapper').append(' <a class="btn-floating btn-large waves-effect waves-light red"><i class="material-icons">+</i></a>');
 
-  $('body').append(nav);
-  $('#navbars').append(containerdiv);
-  $('#nav-wrapper').append(logo);
-  $('#nav-wrapper').append(uls);
-  
-  // user info  
-var container = document.createElement('div');
-container.id = "wrapper";
-$('body').append(container);
 var mainDiv = document.createElement('div');
   mainDiv.id= "userInfo";
 $('#wrapper').append(mainDiv);
 var name = document.createElement('p');
 name.id="name";
+name.style="color:black";
 name.textContent=user.displayName;
 $('#userInfo').append(name);
 var email = document.createElement('p');
 email.id="email";
+email.style="color:black";
 email.textContent=user.email;
+
 $('#userInfo').append(email);
 var image = document.createElement('img');
 image.id="userImage";
-// image.src=user.photoURL;
+image.src=user.photoURL;
 image.setAttribute('alt', 'na');
-image.setAttribute('height', '20px');
-image.setAttribute('width', '20px');
+image.setAttribute('height', '50px');
+image.setAttribute('width', '50px');
 $('#userInfo').append(image);
 
 
 var floatingbutton =document.createElement('a');
 floatingbutton.id= "a";
 floatingbutton.classList = "btn-floating btn-large waves-effect waves-light red"; 
-
+$('body').append(addIcon);
 var addIcon =document.createElement('i');
 addIcon.textContent="add";
 addIcon.className ="material-icons"; 
 $('#a').append(addIcon);
+// $('#footers').show();
+$('#up').hover(function(){
+  $('#modal1').modal();;
+}); 
 
-var footerpage = document.createElement('footer');
-footerpage.className ="page-footer";
-footerpage.id="footerpage";
-
-var containerbox = document.createElement('div');
-containerbox.id="containerbox";
-containerbox.className="container"
-
-var row = document.createElement('div');
-row.className="row";
-row.id="r";
-
-var col = document.createElement('div');
-col.id="c";
-col.classList="col l6 s12";
-
-var footerContent = document.createElement('h5');
-footerContent.id="footerContent";
-footerContent.textContent="Footer Content";
-footerContent.className="white-text";
-
-// footer 
-$('body').append(footerpage);
-$('#footerpage').append(containerbox);
-$('#containerbox').append(row);
-$('#r').append(col);
-$('#c').append(footerContent);
 
 console.log(user);
-
 }else{
     document.body.innerHTML ='<h1>no user found</h1>'
 }
 });
 </script>
-<!-- <h1>HOME</h1> -->
-<!-- <button id="logout" onclick="logout()" >logout</button> -->
+
 <script>
 function logout(){
     firebase.auth().signOut().then(function() {
         console.log("yes");
-        window.location.assign('index.html');
+        window.location.assign('../google%20and%20email/index.html');
 }).catch(function(error) {
   // An error happened.
   console.log("no"+error);
 });
 }
 </script>
+  <footer class="page-footer" id="footers" hidden="hidden">
+              <div class="container">
+                <div class="row">
+                  <div class="col l6 s12">
+                    <h5 class="white-text">Footer Content</h5>
+                    <p class="grey-text text-lighten-4">You can use rows and columns here to organize your footer content.</p>
+                  </div>
+                  <div class="col l4 offset-l2 s12">
+                    <h5 class="white-text">Links</h5>
+                    <ul>
+                      <li><a class="grey-text text-lighten-3" href="#!">Link 1</a></li>
+                      <li><a class="grey-text text-lighten-3" href="#!">Link 2</a></li>
+                      <li><a class="grey-text text-lighten-3" href="#!">Link 3</a></li>
+                      <li><a class="grey-text text-lighten-3" href="#!">Link 4</a></li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              <div class="footer-copyright">
+                <div class="container">
+                © 2014 Copyright Text
+                <a class="grey-text text-lighten-4 right" href="#!">More Links</a>
+                </div>
+              </div>
+            </footer>
+            <div id="modal1" class="modal">
+                <div class="modal-content">
+                  <h4>Modal Header</h4>
+                  <p>A bunch of text</p>
+                </div>
+                <div class="modal-footer">
+                  <a href="#!" class="modal-close waves-effect waves-green btn-flat">Agree</a>
+                </div>
+              </div>
+                                           
 </body>
 </html>
