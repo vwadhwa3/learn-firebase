@@ -1,9 +1,11 @@
 <html>
     <head>
         <title>logined</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
     </head>
-    <body>
+    <body id="b">
         <script src="https://www.gstatic.com/firebasejs/5.9.2/firebase.js"></script>
+        
 <script>
   // Initialize Firebase
   var config = {
@@ -19,18 +21,35 @@
 <script>
 firebase.auth().onAuthStateChanged(function (user){ 
 if(user){
-    
-    document.body.innerHTML ='<button onclick="logout()" style="float:right" >logout</button>'+ '<p>'+user.displayName+'</p>'+'<p>'+ user.email+'</p>';
-    // document.getElementById('photoURL').innerHTML ='<img src="'+firebase.auth().currentUser.photoURL+'"/>';
-    console.log(user.photoURL); 
-    
-    // ='<button id="logout" onclick="logout()" >logout</button>'
+var container = document.createElement('div');
+container.id = "wrapper";
+$('body').append(container);
+var mainDiv = document.createElement('div');
+  mainDiv.id= "userInfo";
+$('#wrapper').append(mainDiv);
+var name = document.createElement('p');
+name.id="name";
+name.textContent=user.displayName;
+$('#userInfo').append(name);
+var email = document.createElement('p');
+email.id="email";
+email.textContent=user.email;
+$('#userInfo').append(email);
+var image = document.createElement('img');
+image.id="userImage";
+// image.src=user.photoURL;
+image.setAttribute('alt', 'na');
+image.setAttribute('height', '20px');
+image.setAttribute('width', '20px');
+$('#userInfo').append(image);
+console.log(user);
+
 }else{
-    document.body.innerHTML ='<h1>no user found </h1>'
+    document.body.innerHTML ='<h1>no user found</h1>'
 }
 });
 </script>
-<h1>hello</h1>
+<!-- <h1>HOME</h1> -->
 <!-- <button id="logout" onclick="logout()" >logout</button> -->
 <script>
 function logout(){
