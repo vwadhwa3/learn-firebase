@@ -5,7 +5,8 @@
     </head>
     <body id="b">
         <script src="https://www.gstatic.com/firebasejs/5.9.2/firebase.js"></script>
-        
+         <link rel = "stylesheet" type = "text/css" href = "../google and email/css/materialize.css" />
+         <script src="../google and email/js/materialize.js"></script>
 <script>
   // Initialize Firebase
   var config = {
@@ -21,6 +22,26 @@
 <script>
 firebase.auth().onAuthStateChanged(function (user){ 
 if(user){
+// navbar
+  var nav = document.createElement('nav');
+  nav.id="navbars";
+  var containerdiv= document.createElement('div');
+  containerdiv.id="nav-wrapper";
+  containerdiv.className="nav-wrapper";
+  var logo = document.createElement('a');
+  logo.id="logo";
+  logo.className="brand-logo";
+  logo.textContent="logo";
+  var uls= document.createElement('ul');
+  uls.id="nav-mobile";
+  uls.classList="right hide-on-med-and-down";
+
+  $('body').append(nav);
+  $('#navbars').append(containerdiv);
+  $('#nav-wrapper').append(logo);
+  $('#nav-wrapper').append(uls);
+  
+  // user info  
 var container = document.createElement('div');
 container.id = "wrapper";
 $('body').append(container);
@@ -42,6 +63,45 @@ image.setAttribute('alt', 'na');
 image.setAttribute('height', '20px');
 image.setAttribute('width', '20px');
 $('#userInfo').append(image);
+
+
+var floatingbutton =document.createElement('a');
+floatingbutton.id= "a";
+floatingbutton.classList = "btn-floating btn-large waves-effect waves-light red"; 
+
+var addIcon =document.createElement('i');
+addIcon.textContent="add";
+addIcon.className ="material-icons"; 
+$('#a').append(addIcon);
+
+var footerpage = document.createElement('footer');
+footerpage.className ="page-footer";
+footerpage.id="footerpage";
+
+var containerbox = document.createElement('div');
+containerbox.id="containerbox";
+containerbox.className="container"
+
+var row = document.createElement('div');
+row.className="row";
+row.id="r";
+
+var col = document.createElement('div');
+col.id="c";
+col.classList="col l6 s12";
+
+var footerContent = document.createElement('h5');
+footerContent.id="footerContent";
+footerContent.textContent="Footer Content";
+footerContent.className="white-text";
+
+// footer 
+$('body').append(footerpage);
+$('#footerpage').append(containerbox);
+$('#containerbox').append(row);
+$('#r').append(col);
+$('#c').append(footerContent);
+
 console.log(user);
 
 }else{
